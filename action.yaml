@@ -1,0 +1,28 @@
+name: Check Version
+description: |
+  Verifies that the version number (in a pull request) was bumped by comparing
+  it to the prevous version from base branch.
+author: Kriasoft
+
+inputs:
+  path:
+    description: "Relative path under $GITHUB_WORKSPACE containing package.json file."
+    default: "."
+  token:
+    description: "Personal access token (PAT) used to fetch the repository."
+    default: ${{ github.token }}
+  format:
+    default: "{name}_v{version}+build.{pr_number}.zip"
+
+outputs:
+  name:
+  version:
+  release:
+
+runs:
+  using: "node12"
+  main: "main.js"
+
+branding:
+  icon: "package"
+  color: "orange"
