@@ -16,8 +16,11 @@ inputs:
 
 outputs:
   name:
+    description: "Git head name"
   version:
+    description: "The new version number."
   release:
+    description: "The release name."
 
 runs:
   using: "node12"
