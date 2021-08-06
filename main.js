@@ -6,6 +6,21 @@
 const path = require("path");
 const cp = require("child_process");
 
+// If the semver string a is greater than b, return 1. If the semver string b is greater than a, return -1. If a equals b, return 0;
+function semverCompare(a, b) {
+    const pa = a.split('.');
+    const pb = b.split('.');
+    for (let i = 0; i < 3; i++) {
+        const na = Number(pa[i]);
+        const nb = Number(pb[i]);
+        if (na > nb) return 1;
+        if (nb > na) return -1;
+        if (!isNaN(na) && isNaN(nb)) return 1;
+        if (isNaN(na) && !isNaN(nb)) return -1;
+    }
+    return 0;
+};
+
 // https://semver.org
 const SEMVER_REGEX = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
 
@@ -43,12 +58,9 @@ if (base.name == head.name) {
 
   const from = base.version.match(SEMVER_REGEX);
   const to = head.version.match(SEMVER_REGEX);
+  const versionDiffResult = semverCompare(from, to);
 
-  if (
-    Number(to[1]) < Number(from[1]) ||
-    Number(to[2]) < Number(from[2]) ||
-    Number(to[3]) < Number(from[3])
-  ) {
+  if (versionDiffResult === 1 || versionDiffResult === 0) {
     console.log(
       `::error file=${file},line=3::Requires a newer version number.`
     );
