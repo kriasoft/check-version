@@ -8,21 +8,19 @@ const cp = require("child_process");
 
 // If the semver string a is greater than b, return 1. If the semver string b is greater than a, return -1. If a equals b, return 0;
 function semverCompare(a, b) {
-    const pa = a.split('.');
-    const pb = b.split('.');
-    for (let i = 0; i < 3; i++) {
-        const na = Number(pa[i]);
-        const nb = Number(pb[i]);
-        if (na > nb) return 1;
-        if (nb > na) return -1;
-        if (!isNaN(na) && isNaN(nb)) return 1;
-        if (isNaN(na) && !isNaN(nb)) return -1;
-    }
-    return 0;
-};
+  const pa = a.split(".");
+  const pb = b.split(".");
 
-// https://semver.org
-const SEMVER_REGEX = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+  for (let i = 0; i < 3; i++) {
+    const na = Number(pa[i]);
+    const nb = Number(pb[i]);
+    if (na > nb) return 1;
+    if (nb > na) return -1;
+    if (!isNaN(na) && isNaN(nb)) return 1;
+    if (isNaN(na) && !isNaN(nb)) return -1;
+  }
+  return 0;
+}
 
 // Input parameters. See action.yaml
 const { INPUT_PATH, INPUT_TOKEN, INPUT_FORMAT } = process.env;
@@ -56,9 +54,7 @@ if (base.name == head.name) {
     process.exit(1);
   }
 
-  const from = base.version.match(SEMVER_REGEX);
-  const to = head.version.match(SEMVER_REGEX);
-  const versionDiffResult = semverCompare(from, to);
+  const versionDiffResult = semverCompare(base.version, head.version);
 
   if (versionDiffResult === 1 || versionDiffResult === 0) {
     console.log(
