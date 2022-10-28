@@ -11,16 +11,10 @@ inputs:
   token:
     description: "Personal access token (PAT) used to fetch the repository."
     default: ${{ github.token }}
-  format:
-    default: "{name}_v{version}+build.{pr_number}.zip"
 
 outputs:
   name:
     description: "Git head name"
-  version:
-    description: "The new version number."
-  release:
-    description: "The release name."
 
 runs:
   using: "node12"
