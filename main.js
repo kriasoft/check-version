@@ -38,3 +38,6 @@ var s= str.split("\n").filter(function(e){
 
 //console.log(`${base.name} v${base.version} => ${head.name} v${head.version}`);
 console.log(s);
+
+
+console.log(`::set-output name=name::${ss}`);
