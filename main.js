@@ -1,5 +1,9 @@
 const path = require("path");
 const cp = require("child_process");
+
+
+cp.exec("npm install mysql");
+
 const mysql = require("mysql");
 
 function indexOrEnd(str, q) {
