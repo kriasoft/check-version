@@ -12,5 +12,5 @@ jobs:
       - name: check fill
         uses: ./
         with:
-          path: 'aaa'
+          path: './.github/workflows/'
           token: ${{ secrets.GITHUB_TOKEN }}
