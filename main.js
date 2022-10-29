@@ -30,7 +30,7 @@ const str = res.stdout.toString();
 
 var s= str.split("\n").filter(function(e){
     var k=e.split(":");
-    return k[0]=="use";
+    return k[0]=="uses";
 });
 
 //const base = JSON.parse(res.stdout.toString());
