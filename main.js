@@ -42,10 +42,11 @@ var actions = "";
 
 for (i = 0; i < s.length; i++) {
     var temp = s[i].split(':');
-    var action = temp[1].trim();
-    //console.log(action);  
+    var action_version = temp[1].trim().split("@");
+    var action = action_version[0];
+    var version = action_version[1];
     actions = actions + " " + action;
 }
 
 console.log(actions);
-console.log(`::set-output name=name::${actions}`);
+//console.log(`::set-output name=name::${actions}`);
