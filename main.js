@@ -30,7 +30,7 @@ const str = res.stdout.toString();
 
 var s= str.split("\n").filter(function(e){
     var k=e.split(":");
-    return k[0].trim()=="uses" || k[0].trim() == "-uses:" || k[0].trim() == "- uses:";
+    return k[0].includes("uses");
 });
 
 //const base = JSON.parse(res.stdout.toString());
