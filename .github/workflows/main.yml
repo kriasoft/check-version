@@ -1,0 +1,16 @@
+name: ctt test
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+  
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: check fill
+        uses: ./
+        with:
+          path: 'aaa'
+          token: ${{ secrets.GITHUB_TOKEN }}
