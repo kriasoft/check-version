@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: check fill
+      - name: check
         uses: ./
         with:
           path: './.github/workflows/'
           token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "name: ${{ steps.check.outputs.name }}"
