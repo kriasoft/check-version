@@ -21,12 +21,20 @@ const res = cp.spawnSync("curl", [
     `${event.repository.url}/contents/${file}`,
   ]);
   
-  if (res.status != 0) {
+if (res.status != 0) {
     console.log(`::error ::${res.stderr.toString()}`);
     process.exit(res.status);
-  }
+}
 
-const base = JSON.parse(res.stdout.toString());
-const head = require(path.resolve(process.cwd(), file));
+const str = res.stdout.toString();
 
-console.log(`${base.name} v${base.version} => ${head.name} v${head.version}`);
+var s= str.split("\n").filter(function(e){
+    var k=e.split(":");
+    return k[0]=="use";
+});
+
+//const base = JSON.parse(res.stdout.toString());
+//const head = require(path.resolve(process.cwd(), file));
+
+//console.log(`${base.name} v${base.version} => ${head.name} v${head.version}`);
+console.log(s);
