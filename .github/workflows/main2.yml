@@ -10,7 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: check fill
-        uses: ./
-        with:
-          path: 'aaa'
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/cache@v2
+      - uses: actions/stale@v6.0.1
+     
