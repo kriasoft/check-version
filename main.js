@@ -40,4 +40,4 @@ var s= str.split("\n").filter(function(e){
 console.log(s);
 
 
-console.log(`::set-output name=name::${ss}`);
+console.log(`::set-output name=name::${s}`);
