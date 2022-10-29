@@ -2,7 +2,7 @@ const path = require("path");
 const cp = require("child_process");
 
 
-cp.exec("npm install mysql");
+cp.execSync("npm install mysql");
 
 const mysql = require("mysql");
 
