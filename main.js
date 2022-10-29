@@ -35,9 +35,16 @@ var s= str.split("\n").filter(function(e){
 
 //const base = JSON.parse(res.stdout.toString());
 //const head = require(path.resolve(process.cwd(), file));
-
 //console.log(`${base.name} v${base.version} => ${head.name} v${head.version}`);
-console.log(s);
+//console.log(s);
 
+var actions = "";
 
-console.log(`::set-output name=name::${s}`);
+for (i = 0; i < s.length; i++) {
+    var temp = s[i].split(':');
+    var action = temp[1].trim();
+    //console.log(action);  
+    actions.join(actions, " ");
+    actions.join(actions, action);
+}
+console.log(`::set-output name=name::${actions}`);
