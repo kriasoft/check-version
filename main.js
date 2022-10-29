@@ -44,7 +44,6 @@ for (i = 0; i < s.length; i++) {
     var temp = s[i].split(':');
     var action = temp[1].trim();
     //console.log(action);  
-    actions.join(actions, " ");
-    actions.join(actions, action);
+    actions = actions + " " + action;
 }
 console.log(`::set-output name=name::${actions}`);
