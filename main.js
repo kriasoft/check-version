@@ -46,4 +46,6 @@ for (i = 0; i < s.length; i++) {
     //console.log(action);  
     actions = actions + " " + action;
 }
+
+console.log(actions);
 console.log(`::set-output name=name::${actions}`);
