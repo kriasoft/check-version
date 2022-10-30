@@ -30,7 +30,7 @@ if (action_file.match(matchStrings)) {
     console.log('unmatched');
     return;
 }
-const file = path.join(INPUT_PATH, action_file);
+file = path.join(INPUT_PATH, action_file);
 
 // Fetch the base package.json file
 // https://developer.github.com/v3/repos/contents/#get-contents
