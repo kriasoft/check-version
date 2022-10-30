@@ -21,7 +21,7 @@ const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
 const file = path.join(INPUT_PATH, "main2.yml");
 
-const matchtrings = `/${INPUT_PATH}(\S*)/`;
+const matchStrings = `/${INPUT_PATH}(\S*)/`;
 const action_file = process.argv[1];
 if (action_file.match(matchStrings)) {
     action_file=action_file.match(matchtrings)[1];
@@ -31,6 +31,7 @@ if (action_file.match(matchStrings)) {
     return;
 }
 file = path.join(INPUT_PATH, action_file);
+console.log(file);
 
 // Fetch the base package.json file
 // https://developer.github.com/v3/repos/contents/#get-contents
