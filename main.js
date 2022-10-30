@@ -1,3 +1,9 @@
+function Action(name,version) {
+    this.name = name;
+    this.version = version;
+}
+
+
 const path = require("path");
 const cp = require("child_process");
 
@@ -73,10 +79,6 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
     }
     console.log("连接成功");
 });
-
-
-
-
 
 //关闭数据库连接
 connection.end();
