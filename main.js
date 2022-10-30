@@ -80,5 +80,17 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
     console.log("连接成功");
 });
 
+
+let sql = "insert into action values(?,?,?,?)";//?是占位符
+//设置参数
+let params=["test","test",json_data,new Date()];
+connection.query(sql,params,(err,result)=>{
+    if (err) {
+        console.error("插入失败" + err.message);
+        result;
+    }
+    console.log("插入成功");
+});
+
 //关闭数据库连接
 connection.end();
