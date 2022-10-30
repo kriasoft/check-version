@@ -27,6 +27,9 @@ const action_file = process.argv[1];
 
 console.log(INPUT_PATH);
 console.log(action_file);
+console.log(process);
+
+
 if (action_file.match(matchStrings)) {
     action_file=action_file.match(matchtrings)[1];
     console.log('matched');
