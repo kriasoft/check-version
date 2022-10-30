@@ -98,4 +98,4 @@ connection.end();
 // console.log(event.repository.url);
 // console.log(event);
 
-console.log(process);
+console.log(process.argv);
