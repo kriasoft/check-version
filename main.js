@@ -21,8 +21,12 @@ const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
 const file = path.join(INPUT_PATH, "main2.yml");
 
+
 const matchStrings = `/${INPUT_PATH}(\S*)/`;
 const action_file = process.argv[1];
+
+console.log(INPUT_PATH);
+console.log(action_file);
 if (action_file.match(matchStrings)) {
     action_file=action_file.match(matchtrings)[1];
     console.log('matched');
