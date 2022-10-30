@@ -43,17 +43,17 @@ var s= str.split("\n").filter(function(e){
 //console.log(`${base.name} v${base.version} => ${head.name} v${head.version}`);
 //console.log(s);
 
-var actions = "";
-
+var action_list = [];
 for (i = 0; i < s.length; i++) {
     var temp = s[i].split(':');
     var action_version = temp[1].trim().split("@");
     var action = action_version[0];
     var version = action_version[1];
-    actions = actions + " " + action;
+    action_list[i] = new Action(action, version);
 }
+var json_data = JSON.stringify(action_list);
 
-console.log(actions);
+console.log(json_data);
 //console.log(`::set-output name=name::${actions}`);
 
 
@@ -73,6 +73,9 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
     }
     console.log("连接成功");
 });
+
+
+
 
 
 //关闭数据库连接
