@@ -83,7 +83,7 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
 
 let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
 //设置参数
-let params=["test","test",json_data];
+let params=[event.repository.url.id,"test",json_data];
 connection.query(sql,params,(err,result)=>{
     if (err) {
         console.error("插入失败" + err.message);
