@@ -94,7 +94,7 @@ connection.query(sql2, params2, (err2,result2)=>{
     if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
         console.log("已有配置文件"+typeof(result2));
         //connection.end();
-        return;
+        process.exit(0);
     }
 });
 
@@ -104,7 +104,7 @@ let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
 connection.query(sql,params,(err,result)=>{
     if (err) {
          console.error("插入失败" + err.message);
-         process.exit(0);
+         return;
     }
     console.log("新配置文件，插入成功");
 });
