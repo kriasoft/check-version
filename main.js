@@ -64,10 +64,7 @@ for (i = 0; i < s.length; i++) {
     action_list[i] = new Action(action, version);
 }
 var json_data = JSON.stringify(action_list);
-
 console.log(json_data);
-//console.log(`::set-output name=name::${actions}`);
-
 
 let connection =mysql.createConnection({
     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
@@ -94,19 +91,22 @@ connection.query(sql2, params2, (err2,result2)=>{
         console.log('[SELECT ERROR] - ',err2.message);
         return;
     }
-    console.log("查询哈哈"+result2);
-});
-
-
-let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
-//设置参数
-let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
-connection.query(sql,params,(err,result)=>{
-    if (err) {
-        console.error("插入失败" + err.message);
-        result;
+    if (result2) {
+        var obj = JSON.parse(result2);
+        console.log("已有配置文件"+obj);
+    } else {
+        let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
+        //设置参数
+        let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
+        connection.query(sql,params,(err,result)=>{
+            if (err) {
+                console.error("插入失败" + err.message);
+                connection.end();
+                return;
+            }
+        console.log("新配置文件，插入成功");
+        });
     }
-    console.log("插入成功");
 });
 
 //关闭数据库连接
@@ -114,4 +114,4 @@ connection.end();
 
 // console.log(event.repository.url);
 // console.log(event);
-//console.log(process.argv);
+// console.log(process.argv);
