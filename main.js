@@ -25,6 +25,7 @@ const action_file = process.argv[1];
 
 console.log(process.env.GITHUB_WORKSPACE);
 console.log(action_file);
+console.log(action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/));
 
 if (action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)) {
     action_file=action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)[1];
