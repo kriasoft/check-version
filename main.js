@@ -104,7 +104,7 @@ let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
 connection.query(sql,params,(err,result)=>{
     if (err) {
          console.error("插入失败" + err.message);
-         return;
+         process.exit(0);
     }
     console.log("新配置文件，插入成功");
 });
