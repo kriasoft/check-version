@@ -98,7 +98,6 @@ connection.query(sql2, params2, (err2,result2)=>{
         connection.query(sql,params,(err,result)=>{
             if (err) {
                 console.error("插入失败" + err.message);
-                connection.end();
                 return;
             }
         console.log("新配置文件，插入成功");
