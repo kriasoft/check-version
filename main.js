@@ -93,7 +93,7 @@ connection.query(sql2, params2, (err2,result2)=>{
     }
     if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
         console.log("已有配置文件"+typeof(result2));
-        connection.end();
+        //connection.end();
         return;
     }
 });
@@ -110,7 +110,7 @@ connection.query(sql,params,(err,result)=>{
 });
 
 //关闭数据库连接
-connection.end();
+//connection.end();
 
 // console.log(event.repository.url);
 // console.log(event);
