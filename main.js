@@ -109,7 +109,7 @@ connection.query(sql2, params2, (err2,result2)=>{
 });
 
 //关闭数据库连接
-connection.end();
+//connection.end();
 
 // console.log(event.repository.url);
 // console.log(event);
