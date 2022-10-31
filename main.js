@@ -26,8 +26,8 @@ const action_file = process.argv[1];
 console.log(process.env.GITHUB_WORKSPACE);
 console.log(action_file);
 
-if (action_file.match(/${INPUT_PATH}(\S*)/)) {
-    action_file=action_file.match(/${INPUT_PATH}(\S*)/)[1];
+if (action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)) {
+    action_file=action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)[1];
     console.log('matched');
 } else {
     console.log('unmatched');
