@@ -3,18 +3,12 @@ function Action(name,version) {
     this.version = version;
 }
 
-
 const path = require("path");
 const cp = require("child_process");
-
 
 cp.execSync("npm install mysql");
 
 const mysql = require("mysql");
-
-function indexOrEnd(str, q) {
-    return str.indexOf(q) === -1 ? str.length : str.indexOf(q);
-}
 
 const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
@@ -23,20 +17,19 @@ var file = path.join(INPUT_PATH, "main2.yml");
 var regex = new RegExp(process.env.GITHUB_WORKSPACE+"(\\S*)");
 var action_file = process.argv[1];
 
-console.log(process.env.GITHUB_WORKSPACE);
-console.log(action_file);
+// console.log(process.env.GITHUB_WORKSPACE);
+// console.log(action_file);
 
-if (action_file.match(regex)) {
-    action_file=action_file.match(regex)[1];
-    console.log('matched');
-} else {
-    console.log('unmatched');
-    return;
-}
-file = path.join(INPUT_PATH, action_file);
-console.log(file);
+// if (action_file.match(regex)) {
+//     action_file=action_file.match(regex)[1];
+//     console.log('matched');
+// } else {
+//     console.log('unmatched');
+//     return;
+// }
+// file = path.join(INPUT_PATH, action_file);
+// console.log(file);
 
-// Fetch the base package.json file
 // https://developer.github.com/v3/repos/contents/#get-contents
 const res = cp.spawnSync("curl", [
     "--header",
