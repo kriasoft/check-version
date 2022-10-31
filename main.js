@@ -16,11 +16,9 @@ function indexOrEnd(str, q) {
     return str.indexOf(q) === -1 ? str.length : str.indexOf(q);
 }
 
-
 const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
 const file = path.join(INPUT_PATH, "main2.yml");
-
 
 const matchStrings = `/${INPUT_PATH}(\S*)/`;
 const action_file = process.argv[1];
@@ -28,7 +26,6 @@ const action_file = process.argv[1];
 console.log(INPUT_PATH);
 console.log(action_file);
 console.log(process);
-
 
 if (action_file.match(matchStrings)) {
     action_file=action_file.match(matchtrings)[1];
@@ -97,6 +94,17 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
         return;
     }
     console.log("连接成功");
+});
+
+var  sql2 = 'SELECT * FROM action where project = ? and workflow = ?';
+let params2=[event.repository.id, process.env.GITHUB_WORKFLOW];
+//查
+connection.query(sql2, params2, (err2,result2)=>{
+    if(err2){
+        console.log('[SELECT ERROR] - ',err2.message);
+        return;
+    }
+    console.log(result2);
 });
 
 
