@@ -13,6 +13,7 @@ jobs:
         uses: ./
         with:
           path: './.github/workflows/'
+          file: 'main2.yml'
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           echo "name: ${{ steps.check.outputs.name }}"
