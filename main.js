@@ -83,7 +83,7 @@ connection.connect((err)=>{//回调函数,如果报错会把err填充上
     console.log("连接成功");
 });
 
-var  sql2 = 'SELECT * FROM action where project = ? and workflow = ?';
+var  sql2 = 'SELECT actions FROM action where project = ? and workflow = ?';
 let params2=[event.repository.id, process.env.GITHUB_WORKFLOW];
 //查
 connection.query(sql2, params2, (err2,result2)=>{
