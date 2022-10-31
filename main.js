@@ -20,12 +20,11 @@ const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
 const file = path.join(INPUT_PATH, "main2.yml");
 
-const matchStrings = `/${process.env.RUNNER_WORKSPACE}(\S*)/`;
+const matchStrings = `/${process.env.GITHUB_WORKSPACE}(\S*)/`;
 const action_file = process.argv[1];
 
-//console.log(INPUT_PATH);
-//console.log(action_file);
-//console.log(process);
+console.log(process.env.GITHUB_WORKSPACE);
+console.log(action_file);
 
 if (action_file.match(matchStrings)) {
     action_file=action_file.match(matchtrings)[1];
