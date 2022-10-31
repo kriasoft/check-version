@@ -91,7 +91,7 @@ connection.query(sql2, params2, (err2,result2)=>{
         console.log('[SELECT ERROR] - ',err2.message);
         return;
     }
-    if (JSON.stringify(result2) == '{}') {
+    if (JSON.stringify(result2) == '{}' || JSON.stringify(result2) == '[]') {
         let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
         //设置参数
         let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
