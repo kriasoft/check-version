@@ -91,25 +91,25 @@ connection.query(sql2, params2, (err2,result2)=>{
         console.log('[SELECT ERROR] - ',err2.message);
         return;
     }
-    if (JSON.stringify(result2) == '{}' || JSON.stringify(result2) == '[]') {
-        let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
-        //设置参数
-        let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
-        connection.query(sql,params,(err,result)=>{
-            if (err) {
-                console.error("插入失败" + err.message);
-                return;
-            }
-        console.log("新配置文件，插入成功");
-        });
-    } else {
-       //var obj = JSON.parse(result2);
-       console.log("已有配置文件"+typeof(result2));
+    if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
+        console.log("已有配置文件"+typeof(result2));
+        connection.end();
+        return;
+});
+
+let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
+//设置参数
+let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
+connection.query(sql,params,(err,result)=>{
+    if (err) {
+         console.error("插入失败" + err.message);
+         return;
     }
+    console.log("新配置文件，插入成功");
 });
 
 //关闭数据库连接
-//connection.end();
+connection.end();
 
 // console.log(event.repository.url);
 // console.log(event);
