@@ -21,11 +21,12 @@ const {INPUT_PATH, INPUT_TOKEN} = process.env;
 const file = path.join(INPUT_PATH, "main2.yml");
 
 const matchStrings = `/${process.env.GITHUB_WORKSPACE}(\S*)/`;
+var regex = new RegExp(process.env.GITHUB_WORKSPACE, 'i');
 const action_file = process.argv[1];
 
 console.log(process.env.GITHUB_WORKSPACE);
 console.log(action_file);
-console.log(action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/));
+console.log(action_file.match(regex));
 
 if (action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)) {
     action_file=action_file.match(/${process.env.GITHUB_WORKSPACE}(\S*)/)[1];
