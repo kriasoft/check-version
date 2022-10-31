@@ -92,8 +92,8 @@ connection.query(sql2, params2, (err2,result2)=>{
         return;
     }
     if (result2) {
-        var obj = JSON.parse(result2);
-        console.log("已有配置文件"+obj);
+        //var obj = JSON.parse(result2);
+        console.log("已有配置文件"+JSON.stringify(result2));
     } else {
         let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
         //设置参数
