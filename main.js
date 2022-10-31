@@ -18,10 +18,10 @@ function indexOrEnd(str, q) {
 
 const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_TOKEN} = process.env;
-const file = path.join(INPUT_PATH, "main2.yml");
+var file = path.join(INPUT_PATH, "main2.yml");
 
 var regex = new RegExp(process.env.GITHUB_WORKSPACE+"(\\S*)");
-const action_file = process.argv[1];
+var action_file = process.argv[1];
 
 console.log(process.env.GITHUB_WORKSPACE);
 console.log(action_file);
