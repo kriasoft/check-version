@@ -95,6 +95,7 @@ connection.query(sql2, params2, (err2,result2)=>{
         console.log("已有配置文件"+typeof(result2));
         connection.end();
         return;
+    }
 });
 
 let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
