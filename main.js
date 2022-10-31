@@ -3,23 +3,20 @@ function Action(name,version) {
     this.version = version;
 }
 
-const path = require("path");
+const path = require("path"); 
 const cp = require("child_process");
-
 cp.execSync("npm install mysql");
 
 const mysql = require("mysql");
 
 const event = require(process.env.GITHUB_EVENT_PATH);
-const {INPUT_PATH, INPUT_TOKEN} = process.env;
-var file = path.join(INPUT_PATH, "main2.yml");
+const {INPUT_PATH, INPUT_FILE, INPUT_TOKEN} = process.env;
+var file = path.join(INPUT_PATH, INPUT_FILE);
 
-var regex = new RegExp(process.env.GITHUB_WORKSPACE+"(\\S*)");
-var action_file = process.argv[1];
-
+// var regex = new RegExp(process.env.GITHUB_WORKSPACE+"(\\S*)");
+// var action_file = process.argv[1];
 // console.log(process.env.GITHUB_WORKSPACE);
 // console.log(action_file);
-
 // if (action_file.match(regex)) {
 //     action_file=action_file.match(regex)[1];
 //     console.log('matched');
@@ -30,6 +27,7 @@ var action_file = process.argv[1];
 // file = path.join(INPUT_PATH, action_file);
 // console.log(file);
 
+
 // https://developer.github.com/v3/repos/contents/#get-contents
 const res = cp.spawnSync("curl", [
     "--header",
@@ -38,7 +36,7 @@ const res = cp.spawnSync("curl", [
     `Authorization: token ${INPUT_TOKEN}`,
     //`${event.repository.url}/contents/${file}?ref=${event.pull_request.base.sha}`,
     `${event.repository.url}/contents/${file}`,
-  ]);
+]);
   
 if (res.status != 0) {
     console.log(`::error ::${res.stderr.toString()}`);
@@ -96,7 +94,7 @@ connection.query(sql2, params2, (err2,result2)=>{
         console.log('[SELECT ERROR] - ',err2.message);
         return;
     }
-    console.log(result2);
+    console.log("查询哈哈"+result2);
 });
 
 
@@ -116,5 +114,4 @@ connection.end();
 
 // console.log(event.repository.url);
 // console.log(event);
-
-console.log(process.argv);
+//console.log(process.argv);
