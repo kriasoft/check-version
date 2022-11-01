@@ -17,7 +17,7 @@ mysqlObj.connect();
 function exec(sql, params) {
     return new Promise((resolve, reject) => {
         //执行sql语句：
-        mysqlObj.query(sql, params, (err, data) => {
+        mysqlObj.query(sql, (err, data) => {
             //需求：返回data
             if (err) { //失败
                 console.log('[SELECT ERROR] - ',err.message);
