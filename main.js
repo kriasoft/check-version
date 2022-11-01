@@ -75,9 +75,10 @@ async function test() {
     if (error) {
         data = JSON.stringify(data);
         data = data[0].actions;
-        for (let obj of data) {
-            console.log(`name:${obj.name}`);
-        }
+        console.log(data);
+//         for (let obj of data) {
+//             console.log(`name:${obj.name}`);
+//         }
     } else {
         console.log('sql执行失败'+data);
     }
