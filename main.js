@@ -66,56 +66,73 @@ for (i = 0; i < s.length; i++) {
 var json_data = JSON.stringify(action_list);
 console.log(json_data);
 
-let connection =mysql.createConnection({
-    host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
-    port:3306,//端口
-    user:"ctt",//数据库账号
-    password:"Hello123",//密码
-    database:"action"//连接的数据库名
-});
+let mysqlExec = require('./util.js');
 
-//调用connect方法创造连接
-connection.connect((err)=>{//回调函数,如果报错会把err填充上
-    if(err){
-        console.error("连接失败"+err.stack);//打印堆栈信息
-        return;
+async function test() {
+    var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
+    let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
+    let [error, data] = await mysqlExec(sql, params);
+    if (error) {
+        for (let obj of data) {
+            console.log(`name:${obj.name}`);
+        }
+    } else {
+        console.log('sql执行失败');
     }
-    console.log("连接成功");
-});
+}
+test();
 
-var  sql2 = 'SELECT actions FROM action where project = ? and workflow = ?';
-let params2=[event.repository.id, process.env.GITHUB_WORKFLOW];
-//查
-connection.query(sql2, params2, (err2,result2)=>{
-    if(err2){
-        console.log('[SELECT ERROR] - ',err2.message);
-        return;
-    }
-    if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
-        console.log("已有配置文件"+typeof(result2));
-        console.log(JSON.stringify(result2));
-        console.log(result2[1].toString());
-        console.log(result2[2].toString());
-        //配置文件与数据库中对比
-        //connection.end();
-        process.exit(0);
-    }
-});
 
-let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
-//设置参数
-let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
-connection.query(sql,params,(err,result)=>{
-    if (err) {
-         console.error("插入失败" + err.message);
-         return;
-    }
-    console.log("新配置文件，插入成功");
-});
+// let connection =mysql.createConnection({
+//     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
+//     port:3306,//端口
+//     user:"ctt",//数据库账号
+//     password:"Hello123",//密码
+//     database:"action"//连接的数据库名
+// });
 
-//关闭数据库连接
-connection.end();
+// //调用connect方法创造连接
+// connection.connect((err)=>{//回调函数,如果报错会把err填充上
+//     if(err){
+//         console.error("连接失败"+err.stack);//打印堆栈信息
+//         return;
+//     }
+//     console.log("连接成功");
+// });
 
-// console.log(event.repository.url);
-// console.log(event);
-// console.log(process.argv);
+// var  sql2 = 'SELECT actions FROM action where project = ? and workflow = ?';
+// let params2=[event.repository.id, process.env.GITHUB_WORKFLOW];
+// //查
+// connection.query(sql2, params2, (err2,result2)=>{
+//     if(err2){
+//         console.log('[SELECT ERROR] - ',err2.message);
+//         return;
+//     }
+//     if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
+//         console.log("已有配置文件"+typeof(result2));
+//         console.log(JSON.stringify(result2));
+//         console.log(result2[1].toString());
+//         console.log(result2[2].toString());
+//         //配置文件与数据库中对比
+//         //connection.end();
+//         process.exit(0);
+//     }
+// });
+
+// let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
+// //设置参数
+// let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
+// connection.query(sql,params,(err,result)=>{
+//     if (err) {
+//          console.error("插入失败" + err.message);
+//          return;
+//     }
+//     console.log("新配置文件，插入成功");
+// });
+
+// //关闭数据库连接
+// connection.end();
+
+// // console.log(event.repository.url);
+// // console.log(event);
+// // console.log(process.argv);
