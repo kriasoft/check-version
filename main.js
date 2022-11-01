@@ -69,7 +69,7 @@ console.log(json_data);
 let mysqlExec = require('./util.js');
 
 async function test() {
-    var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
+    var  sql = 'SELECT actions FROM action';
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
