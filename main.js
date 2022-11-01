@@ -93,7 +93,7 @@ connection.query(sql2, params2, (err2,result2)=>{
     }
     if (JSON.stringify(result2) != '{}' && JSON.stringify(result2) != '[]') {
         console.log("已有配置文件"+typeof(result2));
-        
+        console.log(JSON.parse(result2));
         //配置文件与数据库中对比
         //connection.end();
         process.exit(0);
