@@ -25,9 +25,9 @@ function exec(sql, params) {
             } else { //成功
                 resolve([true, data]);
             }
+            mysqlObj.end();
         });
     });
 }
 
 module.exports = exec;
-mysqlObj.end();
