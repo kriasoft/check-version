@@ -5,7 +5,7 @@ function Action(name,version) {
 
 const path = require("path"); 
 const cp = require("child_process");
-//cp.execSync("npm install mysql");
+cp.execSync("npm install mysql");
 
 //const mysql = require("mysql");
 
