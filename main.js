@@ -74,7 +74,7 @@ async function test() {
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
         data = JSON.stringify(data);
-        data = data[0].actions;
+        //data = data[0].actions;
         console.log(data);
 //         for (let obj of data) {
 //             console.log(`name:${obj.name}`);
