@@ -8,7 +8,7 @@ const mysqlObj = mysql.createConnection({ host: "rm-uf60x57re73u05414go.mysql.rd
 mysqlObj.connect();
 
 //执行sql语句：
-function exec(sql) {
+function exec(sql, params) {
     return new Promise((resolve, reject) => {
         //执行sql语句：
         mysqlObj.query(sql, params, (err, data) => {
