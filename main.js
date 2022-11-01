@@ -66,31 +66,21 @@ for (i = 0; i < s.length; i++) {
 var json_data = JSON.stringify(action_list);
 console.log(json_data);
 
-// let mysqlExec = require('./util.js');
+let mysqlExec = require('./util.js');
 
-// async function test() {
-//     var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
-//     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
-//     let [error, data] = await mysqlExec(sql, params);
-//     if (error) {
-//         for (let obj of data) {
-//             console.log(`name:${obj.name}`);
-//         }
-//     } else {
-//         console.log('sql执行失败');
-//     }
-// }
-// test();
-
-cp.execSync("npm install mysql-libmysqlclient");
-var mysql = require('mysql-libmysqlclient') ;
-var client = mysql.createConnectionSync("rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com", "ctt", "Hello123", "action") ;
-
-var query = "SELECT * FROM action;" ;
-var handle = client.querySync(query) ;
-var results = handle.fetchAllSync() ;
-
-console.log(JSON.stringify(results)) ; 
+async function test() {
+    var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
+    let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
+    let [error, data] = await mysqlExec(sql, params);
+    if (error) {
+        for (let obj of data) {
+            console.log(`name:${obj.name}`);
+        }
+    } else {
+        console.log('sql执行失败'+data);
+    }
+}
+test();
 
 
 // let connection =mysql.createConnection({
