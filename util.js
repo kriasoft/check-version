@@ -2,7 +2,13 @@
 //引入mysql包
 const mysql = require('mysql');
 //创建mysql数据库连接：
-const mysqlObj = mysql.createConnection({ host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com", port: 3306, user: "ctt", password: "Hello123", database: "action" });
+let mysqlObj =mysql.createConnection({
+    host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
+    port:3306,//端口
+    user:"ctt",//数据库账号
+    password:"Hello123",//密码
+    database:"action"//连接的数据库名
+});
 
 //连接mysql数据库：
 mysqlObj.connect();
@@ -14,6 +20,7 @@ function exec(sql, params) {
         mysqlObj.query(sql, params, (err, data) => {
             //需求：返回data
             if (err) { //失败
+                console.log('[SELECT ERROR] - ',err.message);
                 resolve([false, 'sql语句错误']);
             } else { //成功
                 resolve([true, data]);
@@ -21,7 +28,6 @@ function exec(sql, params) {
         });
     });
 }
-
 
 module.exports = exec;
 mysqlObj.end();
