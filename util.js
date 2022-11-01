@@ -24,3 +24,4 @@ function exec(sql, params) {
 
 
 module.exports = exec;
+connection.end();
