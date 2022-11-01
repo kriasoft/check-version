@@ -5,9 +5,9 @@ function Action(name,version) {
 
 const path = require("path"); 
 const cp = require("child_process");
-cp.execSync("npm install mysql");
+//cp.execSync("npm install mysql");
 
-const mysql = require("mysql");
+//const mysql = require("mysql");
 
 const event = require(process.env.GITHUB_EVENT_PATH);
 const {INPUT_PATH, INPUT_FILE, INPUT_TOKEN} = process.env;
