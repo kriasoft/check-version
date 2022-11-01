@@ -30,3 +30,4 @@ function exec(sql, params) {
 }
 
 module.exports = exec;
+mysqlObj.end();
