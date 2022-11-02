@@ -2,21 +2,23 @@
 //引入mysql包
 const mysql = require('mysql');
 //创建mysql数据库连接：
-let mysqlObj =mysql.createConnection({
-    host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
-    port:3306,//端口
-    user:"ctt",//数据库账号
-    password:"Hello123",//密码
-    database:"action"//连接的数据库名
-});
+// let mysqlObj =mysql.createConnection({
+//     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
+//     port:3306,//端口
+//     user:"ctt",//数据库账号
+//     password:"Hello123",//密码
+//     database:"action"//连接的数据库名
+// });
+
+var dbutil = require('./dbutil');
+var connection = null;
 
 //执行sql语句：
 function exec(sql, params) {
-    //连接mysql数据库：
-    mysqlObj.connect();
+   connection = dbutil.createConnection();
     return new Promise((resolve, reject) => {
         //执行sql语句：
-        mysqlObj.query(sql, params, (err, data) => {
+        connection.query(sql, params, (err, data) => {
             //需求：返回data
             if (err) { //失败
                 console.log('[SELECT ERROR] - ',err.message);
@@ -24,9 +26,11 @@ function exec(sql, params) {
             } else { //成功
                 resolve([true, data]);
             }
-            mysqlObj.end();
+            connection.end();
         });
     });
 }
 
 module.exports = exec;
+
+
