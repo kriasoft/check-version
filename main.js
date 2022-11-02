@@ -80,6 +80,7 @@ async function getExistAction() {
         for (let obj of actions_obj) {
             console.log(`name:${obj.name}` + `  version:${obj.version}`);
             actions_db[i] = new Action(obj.name,obj.version);
+            i++;
         }
         return i == 0;
     } else {
