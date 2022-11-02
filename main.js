@@ -87,7 +87,7 @@ async function getExistAction() {
 }
 getExistAction();
 
-if (!action_db) {
+if (!actions_db) {
     console.log("数据库中无该配置文件，新增");
     insertAction(json_data);
     return;
