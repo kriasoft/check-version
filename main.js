@@ -79,7 +79,8 @@ async function test() {
 //             console.log(`name:${obj.name}`);
 //         }
         
-        console.log(JSON.stringify(actions_obj));
+        console.log(actions_obj[0].name);
+        //"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"
         
         //data = JSON.stringify(data);
         //data = data[0].actions;
