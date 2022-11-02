@@ -99,9 +99,9 @@ getExistAction().then((res)=>{
 },(res)=>{ console.log("运行错误:"+res);
 });
 
-async function insertAction(action) {
+async function insertAction(json_data) {
     let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
-    let params=[event.repository.id, process.env.GITHUB_WORKFLOW, action];
+    let params=[event.repository.id, process.env.GITHUB_WORKFLOW, json_data];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
         console.log('插入成功'+data);
