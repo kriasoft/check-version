@@ -37,6 +37,14 @@ const res = cp.spawnSync("curl", [
     //`${event.repository.url}/contents/${file}?ref=${event.pull_request.base.sha}`,
     `${event.repository.url}/contents/${file}`,
 ]);
+
+
+// 获取版本号
+// https://blog.csdn.net/catoop/article/details/121543187
+// https://blog.csdn.net/weixin_34416649/article/details/93643111?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-93643111-blog-121543187.pc_relevant_3mothn_strategy_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-93643111-blog-121543187.pc_relevant_3mothn_strategy_recovery&utm_relevant_index=9
+// VERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
+// echo $VERSION
+
   
 if (res.status != 0) {
     console.log(`::error ::${res.stderr.toString()}`);
@@ -93,12 +101,15 @@ async function getExistAction() {
 getExistAction().then((res)=>{
     if (res) {
         console.log("数据库中无该配置文件，新增");
+        //查询当前 模糊版本的确切版本
+        
         insertAction(json_data);
     } else {
         console.log("有数据了");
         // 新的action_list与旧的action_list对比
+        // 1) 新的是确切版本 --- 不管
         
-        
+        // 2) 新的是lastest或v2 --- 对比版本
         
         
     }
