@@ -68,8 +68,8 @@ console.log(json_data);
 
 let mysqlExec = require('./util.js');
 
-var actions_db = null;
-async function getExistAction() {
+var actions_db = [];
+function getExistAction() {
     var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
@@ -87,13 +87,13 @@ async function getExistAction() {
 }
 getExistAction();
 
-if (!actions_db) {
+if (actions_db.length == 0) {
     console.log("数据库中无该配置文件，新增");
     insertAction(json_data);
     return;
 }
 
-async function insertAction(action) {
+function insertAction(action) {
     let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
     let params=[event.repository.id, process.env.GITHUB_WORKFLOW, action];
     let [error, data] = await mysqlExec(sql, params);
