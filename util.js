@@ -10,11 +10,10 @@ let mysqlObj =mysql.createConnection({
     database:"action"//连接的数据库名
 });
 
-//连接mysql数据库：
-mysqlObj.connect();
-
 //执行sql语句：
 function exec(sql, params) {
+    //连接mysql数据库：
+    mysqlObj.connect();
     return new Promise((resolve, reject) => {
         //执行sql语句：
         mysqlObj.query(sql, params, (err, data) => {
