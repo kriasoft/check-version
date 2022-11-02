@@ -73,7 +73,7 @@ async function test() {
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
-        var actions_obj = data[0];
+        var actions_obj = data[0].actions;
         //{"actions":"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"}
         for (let obj of actions_obj) {
             console.log(`name:${obj.name}`);
