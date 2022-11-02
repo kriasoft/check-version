@@ -83,11 +83,11 @@ async function getExistAction() {
             actions_db[i] = new Action(obj.name,obj.version);
             i++;
         }
-        return i == 0;
+        return false;
     } else {
         console.log('sql执行失败'+data);
     }
-    return false;
+    return true;
 }
 
 getExistAction().then((res)=>{
@@ -96,6 +96,11 @@ getExistAction().then((res)=>{
         insertAction(json_data);
     } else {
         console.log("有数据了");
+        // 新的action_list与旧的action_list对比
+        
+        
+        
+        
     }
 },(res)=>{ console.log("运行错误:"+res);
 });
