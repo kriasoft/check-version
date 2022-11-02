@@ -78,8 +78,14 @@ async function test() {
 //         for (let obj of actions_obj) {
 //             console.log(`name:${obj.name}`);
 //         }
+        console.log("actions_obj[0]" + actions_obj[0]);
+        console.log("actions_obj[0].name" + actions_obj[0].name);
+        console.log("JSON.stringify actions_obj" + JSON.stringify(actions_obj));
+        console.log("JSON.stringify actions_obj[0]" + JSON.stringify(actions_obj[0]));
         
-        console.log(actions_obj[0].name);
+        console.log("JSON.parse actions_obj" + JSON.parse(actions_obj));
+        console.log("JSON.parse actions_obj[0]" + JSON.parse(actions_obj[0]));
+        
         //"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"
         
         //data = JSON.stringify(data);
