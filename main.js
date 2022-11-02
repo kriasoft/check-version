@@ -68,33 +68,18 @@ console.log(json_data);
 
 let mysqlExec = require('./util.js');
 
+var actions_obj = null;
 async function test() {
     var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
-        var actions_obj = data[0].actions;
-        //{"actions":"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"}
-//         for (let obj of actions_obj) {
-//             console.log(`name:${obj.name}`);
-//         }
-//         console.log("actions_obj[0]" + actions_obj[0]);
-//         console.log("actions_obj[0].name" + actions_obj[0].name);
-//         console.log("JSON.stringify actions_obj" + JSON.stringify(actions_obj));
-//         console.log("JSON.stringify actions_obj[0]" + JSON.stringify(actions_obj[0]));
-        
-        actions_obj = JSON.parse(actions_obj);
-        console.log(JSON.stringify(actions_obj[0]));
-//         console.log("JSON.parse actions_obj[0]" + JSON.parse(actions_obj[0]));
-        
-        //"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"
-        
-        //data = JSON.stringify(data);
-        //data = data[0].actions;
-        //console.log(JSON.stringify(data[0]));
-//         for (let obj of data) {
-//             console.log(`name:${obj.name}`);
-//         }
+        actions_obj = JSON.parse(data[0].actions);
+        //[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]
+  
+        for (let obj of actions_obj) {
+            console.log(`name:${obj.name}` + `  version:${obj.version}`);
+        }
     } else {
         console.log('sql执行失败'+data);
     }
