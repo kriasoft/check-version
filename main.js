@@ -74,6 +74,7 @@ async function getExistAction() {
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
+        if (data == null || data[0] == null) return true;
         let actions_obj = JSON.parse(data[0].actions);
         //[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]
         let i = 0;
