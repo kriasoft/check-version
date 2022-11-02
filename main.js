@@ -75,9 +75,11 @@ async function test() {
     if (error) {
         var actions_obj = data[0].actions;
         //{"actions":"[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]"}
-        for (let obj of actions_obj) {
-            console.log(`name:${obj.name}`);
-        }
+//         for (let obj of actions_obj) {
+//             console.log(`name:${obj.name}`);
+//         }
+        
+        console.log(JSON.stringify(actions_obj));
         
         //data = JSON.stringify(data);
         //data = data[0].actions;
