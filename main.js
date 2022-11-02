@@ -85,14 +85,18 @@ async function getExistAction() {
     } else {
         console.log('sql执行失败'+data);
     }
+    return false;
 }
-var has = await getExistAction();
 
-if (!has) {
-    console.log("数据库中无该配置文件，新增");
-    insertAction(json_data);
-    return;
-}
+getExistAction().then((res)=>{
+    if (res) {
+        console.log("数据库中无该配置文件，新增");
+        insertAction(json_data);
+    } else {
+        console.log("有数据了");
+    }
+},(res)=>{ console.log("运行错误:"+res);
+});
 
 async function insertAction(action) {
     let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
