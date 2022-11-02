@@ -68,24 +68,41 @@ console.log(json_data);
 
 let mysqlExec = require('./util.js');
 
-var actions_obj = null;
-async function test() {
+var actions_db = null;
+async function getExistAction() {
     var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
-        actions_obj = JSON.parse(data[0].actions);
+        let actions_obj = JSON.parse(data[0].actions);
         //[{\"name\":\"actions/checkout\",\"version\":\"v2\"},{\"name\":\"actions/cache\",\"version\":\"v2\"},{\"name\":\"actions/stale\",\"version\":\"v6.0.1\"}]
-  
+        let i = 0;
         for (let obj of actions_obj) {
             console.log(`name:${obj.name}` + `  version:${obj.version}`);
+            actions_db[i] = new Action(obj.name,obj.version);
         }
     } else {
         console.log('sql执行失败'+data);
     }
 }
-test();
+getExistAction();
 
+if (!action_db) {
+    console.log("数据库中无该配置文件，新增");
+    insertAction(json_data);
+    return;
+}
+
+async function insertAction(action) {
+    let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
+    let params=[event.repository.id, process.env.GITHUB_WORKFLOW, action];
+    let [error, data] = await mysqlExec(sql, params);
+    if (error) {
+        console.log('插入成功'+data);
+    } else {
+        console.log('sql执行失败'+data);
+    }
+}
 
 // let connection =mysql.createConnection({
 //     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
