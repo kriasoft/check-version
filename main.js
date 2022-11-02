@@ -73,9 +73,9 @@ async function test() {
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
     if (error) {
-        data = JSON.stringify(data);
+        //data = JSON.stringify(data);
         //data = data[0].actions;
-        console.log(data);
+        console.log(data[0]);
 //         for (let obj of data) {
 //             console.log(`name:${obj.name}`);
 //         }
