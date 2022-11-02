@@ -69,7 +69,7 @@ console.log(json_data);
 let mysqlExec = require('./util.js');
 
 var actions_db = [];
-function getExistAction() {
+async function getExistAction() {
     var  sql = 'SELECT actions FROM action where project = ? and workflow = ?';
     let params =[event.repository.id, process.env.GITHUB_WORKFLOW];
     let [error, data] = await mysqlExec(sql, params);
@@ -81,19 +81,20 @@ function getExistAction() {
             console.log(`name:${obj.name}` + `  version:${obj.version}`);
             actions_db[i] = new Action(obj.name,obj.version);
         }
+        return i == 0;
     } else {
         console.log('sql执行失败'+data);
     }
 }
-getExistAction();
+var has = await getExistAction();
 
-if (actions_db.length == 0) {
+if (!has) {
     console.log("数据库中无该配置文件，新增");
     insertAction(json_data);
     return;
 }
 
-function insertAction(action) {
+async function insertAction(action) {
     let sql = "INSERT INTO action(project,workflow,actions,last_modified) VALUES (?,?,?,now())";
     let params=[event.repository.id, process.env.GITHUB_WORKFLOW, action];
     let [error, data] = await mysqlExec(sql, params);
