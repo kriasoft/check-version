@@ -75,7 +75,7 @@ async function test() {
     if (error) {
         //data = JSON.stringify(data);
         //data = data[0].actions;
-        console.log(data[0]);
+        console.log(JSON.stringify(data[0]));
 //         for (let obj of data) {
 //             console.log(`name:${obj.name}`);
 //         }
