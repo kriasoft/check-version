@@ -132,16 +132,22 @@ cp.execSync("npm install @octokit/core");
 const { Octokit } = require("@octokit/core");
 // Octokit.js
 // https://github.com/octokit/core.js#readme
-const octokit = new Octokit({
-  auth: INPUT_TOKEN
-});
 
-const { versions } = await octokit.request('GET /repos/{owner}/{repo}/releases', {
-  owner: 'nickchou',
-  repo: 'paopao'
-});
+getVersion('nickchou', 'paopao');
 
-console.log(versions);
+async function getVersion(owner, repo) {
+    let octokit = new Octokit({
+        auth: INPUT_TOKEN
+    });
+
+    let response = await octokit.request('GET /repos/{owner}/{repo}/releases', {
+        owner: owner,
+        repo: repo
+    });
+    
+    console.log('response:', response); 
+    return response;
+}
 
 // let connection =mysql.createConnection({
 //     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
