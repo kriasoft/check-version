@@ -127,6 +127,7 @@ async function insertAction(json_data) {
     }
 }
 
+cp.execSync("npm install request");
 const request = require('request');
 request('https://api.github.com/repos/nickchou/paopao/releases', function (error, response, body) {
   console.error('error:', error); // Print the error if one occurred
