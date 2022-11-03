@@ -138,6 +138,7 @@ var v = getVersion('nickchou', 'paopao');
 //     obj = JSON.parse(obj);
 //     console.log(`name:${obj.name}` + ` version:${obj.tag_name}`);
 // }
+console.log('v  ', v); 
 console.log('v.data:  ', v.data); 
 console.log('typeof v.data:  ', typeof(v.data)); 
 
