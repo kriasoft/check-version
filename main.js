@@ -134,11 +134,9 @@ const { Octokit } = require("@octokit/core");
 // https://github.com/octokit/core.js#readme
 
 var v = getVersion('nickchou', 'paopao');
-if (v && v.data) {
-    let i = 0;
-    for (let obj of JSON.parse(v.data)) {
-        console.log(`name:${obj.name}` + `  version:${obj.tag_name}`);
-    }
+let i = 0;
+for (let obj of JSON.parse(v.data)) {
+    console.log(`name:${obj.name}` + ` version:${obj.tag_name}`);
 }
 
 async function getVersion(owner, repo) {
@@ -151,7 +149,7 @@ async function getVersion(owner, repo) {
         repo: repo
     });
     
-    console.log('response:', response); 
+    //console.log('response:', response); 
     return response;
 }
 
