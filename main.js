@@ -127,6 +127,15 @@ async function insertAction(json_data) {
     }
 }
 
+const request = require('request');
+request('https://api.github.com/repos/nickchou/paopao/releases', function (error, response, body) {
+  console.error('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body); // Print the HTML for the Google homepage.
+});
+
+
+
 // let connection =mysql.createConnection({
 //     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
 //     port:3306,//端口
