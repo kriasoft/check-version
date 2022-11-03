@@ -129,6 +129,7 @@ async function insertAction(json_data) {
 
 cp.execSync("npm install request");
 cp.execSync("npm install @octokit/core");
+const { Octokit } = require("@octokit/core");
 // Octokit.js
 // https://github.com/octokit/core.js#readme
 const octokit = new Octokit({
