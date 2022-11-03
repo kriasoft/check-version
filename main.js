@@ -160,7 +160,6 @@ async function getVersion(owner, repo) {
 getVersion('nickchou', 'paopao').then((v)=>{
     console.log('v.data:  ', v.data); 
     for (let obj of v.data) {
-        obj = JSON.parse(obj);
         console.log(`name:${obj.name}` + ` version:${obj.tag_name}`);
     }
 },(v)=>{ console.log("运行错误:"+res);
