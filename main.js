@@ -158,7 +158,7 @@ async function getVersion(owner, repo) {
 
 
 getVersion('nickchou', 'paopao').then((v)=>{
-    console.log('v.data:  ', v.data); 
+    //console.log('v.data:  ', v.data); 
     for (let obj of v.data) {
         console.log(`name:${obj.name}` + ` version:${obj.tag_name}`);
     }
