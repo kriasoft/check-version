@@ -134,7 +134,7 @@ const { Octokit } = require("@octokit/core");
 // https://github.com/octokit/core.js#readme
 
 var v = getVersion('nickchou', 'paopao');
-for (let obj of JSON.parse(v.data)) {
+for (let obj of JSON.parse(v[0].data)) {
     console.log(`name:${obj.name}` + ` version:${obj.tag_name}`);
 }
 
