@@ -156,6 +156,14 @@ async function getVersion(owner, repo) {
     return response;
 }
 
+
+getVersion('nickchou', 'paopao').then((v)=>{
+    console.log('v  ', v); 
+    console.log('v.data:  ', v.data); 
+    console.log('typeof v.data:  ', typeof(v.data)); 
+},(v)=>{ console.log("运行错误:"+res);
+});
+
 // let connection =mysql.createConnection({
 //     host: "rm-uf60x57re73u05414go.mysql.rds.aliyuncs.com",//连接本地计算机
 //     port:3306,//端口
