@@ -5,6 +5,8 @@
 
 const path = require("path");
 const cp = require("child_process");
+const fs = require("fs")
+const os = require("os")
 
 // If the semver string a is greater than b, return 1. If the semver string b is greater than a, return -1. If a equals b, return 0;
 var semver =
@@ -136,6 +138,7 @@ const release = INPUT_FORMAT.replace(/\{pkg\}/gi, head.name)
   .replace(/\{pr_number\}/gi, event.pull_request.number);
 
 // Set the action output values (name, version, release)
-console.log(`::set-output name=name::${head.name}`);
-console.log(`::set-output name=version::${head.version}`);
-console.log(`::set-output name=release::${release}`);
+const output = process.env['GITHUB_OUTPUT']
+fs.appendFileSync(output, `name=${head.name}${os.EOL}`)
+fs.appendFileSync(output, `version=${head.version}${os.EOL}`)
+fs.appendFileSync(output, `release=${release}${os.EOL}`)
